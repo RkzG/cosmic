@@ -44,6 +44,15 @@ Proyek upstream bergerak sangat cepat (commit pertama 1 Oktober 2026, sudah v0.2
 - Penggabungan upstream dilakukan rutin: `git fetch upstream` lalu `git merge upstream/main` di branch terpisah, uji, baru gabung ke branch utama.
 - Kerja selalu di branch `cosmic/<nama-fase-atau-tugas>`, commit per langkah kecil, lalu push branch itu ke `origin`. **Berhenti di situ: jangan membuat PR dan jangan merge.** Setelah push, berikan Franz link compare `https://github.com/RkzG/cosmic/compare/main...<nama-branch>` dan draft deskripsi PR, supaya Franz yang membuat PR ke `main`. Jangan pernah membuat PR ke `storytold/effectcraft`.
 
+## Build dan pemeriksaan
+
+Aturan ini **menggantikan** aturan CI di `AGENTS.md` upstream ("`cargo xtask ci` sebelum setiap commit").
+
+- Cosmic hanya menargetkan **desktop Windows**, jadi pemeriksaan wasm (`cargo xtask wasm`) dilewati.
+- Saat kerja harian, cukup build dan jalankan test pada crate yang diubah (`cargo test -p <crate>`), ditambah `cargo fmt --check`.
+- Pemeriksaan lengkap tanpa wasm, `powershell -ExecutionPolicy Bypass -File cosmic/scripts/ci.ps1`, hanya dijalankan **sekali sebelum Franz merge PR sebuah fase**. Skrip ini menjalankan tahap-tahap `cargo xtask ci` satu per satu (fmt, clippy, test lewat cargo-nextest, test GPU, doctest, pdf-deps, lock-patches, layers, assets) ditambah `rebrand.py --check`. Jangan memakai `cargo xtask ci` langsung di Windows: tahap test-nya gagal karena membangun ulang `xtask.exe` yang sedang berjalan.
+- Test `ui-egui` dijalankan lewat `cargo nextest`, bukan `cargo test` biasa, karena test yang memakai GPU harus berjalan satu per satu (`.config/nextest.toml`).
+
 ## Pembagian bahasa dan komponen
 
 - **Rust**: hanya untuk bagian di dalam editor (panel AI, tampilan tahap, fitur kunci layer, modul efek baru).
