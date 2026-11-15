@@ -188,6 +188,198 @@ EDITS = {
 }
 
 
+def row(key: str) -> str:
+    """A one-line panel catalog row `("<key>", "<translation>"),` in i18n/ui.rs."""
+    return r'^    \(' + re.escape(f'"{key}"') + r', [^\n]*\),\n'
+
+
+def menu_row(command: str, label: str) -> str:
+    """A one-line menu catalog row `("<command>", "<label>", "<translation>"),` in i18n.rs."""
+    return r'^    \(' + re.escape(f'"{command}", "{label}"') + r', [^\n]*\),\n'
+
+
+# Second pass (Phase 0): the Home screen, header, About links, Help and File menus, dialogs,
+# Settings, Learn and the Auto-Save, Log and Presets folders. Cosmic links to its own repository
+# and credits EffectCraft; the ArtCraft Discord, website, app page and sibling apps are gone.
+MORE = {
+    "crates/engine/src/home/links.rs": [
+        exact(
+            'pub const GITHUB: &str = "https://github.com/storytold/effectcraft";\n'
+            'pub const ISSUES: &str = "https://github.com/storytold/effectcraft/issues";',
+            "// Cosmic fork: Help, About and Home link to Cosmic's repository; UPSTREAM credits EffectCraft.\n"
+            'pub const GITHUB: &str = "https://github.com/RkzG/cosmic";\n'
+            'pub const ISSUES: &str = "https://github.com/RkzG/cosmic/issues";\n'
+            'pub const UPSTREAM: &str = "https://github.com/storytold/effectcraft";',
+        ),
+    ],
+    "crates/engine/src/cmd/help.rs": [
+        exact('cmd!("help.docs", "EffectCraft Help...",', 'cmd!("help.docs", "Cosmic Help...",'),
+        exact(
+            'cmd!("help.appPage", "EffectCraft Home Page", ["Help"], None, "{}", always, |s, _| open(s, links::APP_PAGE.into())),',
+            'cmd!("help.appPage", "Based on EffectCraft", ["Help"], None, "{}", always, |s, _| open(s, links::UPSTREAM.into())),',
+        ),
+        exact('cmd!("help.github", "EffectCraft on GitHub",', 'cmd!("help.github", "Cosmic on GitHub",'),
+        # No longer in the Help menu (a test requires a declared menu path to exist in the tree);
+        # the commands stay for scripts and agents.
+        exact('cmd!("help.discord", "Join the ArtCraft Discord...", ["Help"],', 'cmd!("help.discord", "Join the ArtCraft Discord...", [],'),
+        exact('cmd!("help.website", "ArtCraft Website", ["Help"],', 'cmd!("help.website", "ArtCraft Website", [],'),
+    ],
+    "crates/engine/src/tests/session.rs": [
+        exact(
+            'assert_eq!(s.execute("help.github", json!({})).unwrap()["url"], "https://github.com/storytold/effectcraft");',
+            'assert_eq!(s.execute("help.github", json!({})).unwrap()["url"], "https://github.com/RkzG/cosmic");',
+        ),
+        exact(
+            'url.strip_prefix("https://github.com/storytold/effectcraft/blob/main/")',
+            'url.strip_prefix("https://github.com/RkzG/cosmic/blob/main/")',
+        ),
+    ],
+    "crates/engine/src/tests/aep_import.rs": [
+        exact('            "EffectCraft Project...",\n', '            "Cosmic Project...",\n'),
+    ],
+    "crates/engine/src/menus.rs": [
+        exact("  EffectCraft Help... | help.docs", "  Cosmic Help... | help.docs"),
+        exact("    EffectCraft Project... | file.importProject", "    Cosmic Project... | file.importProject"),
+        remove(r"^  Join the ArtCraft Discord\.\.\. \| help\.discord\n", 1),
+        remove(r"^  ArtCraft Website \| help\.website\n", 1),
+        exact("  EffectCraft Home Page | help.appPage", "  Based on EffectCraft | help.appPage"),
+        exact("  EffectCraft on GitHub | help.github", "  Cosmic on GitHub | help.github"),
+    ],
+    "crates/engine/src/cmd/import_project.rs": [
+        exact('        "EffectCraft Project...",\n        ["File", "Import"],', '        "Cosmic Project...",\n        ["File", "Import"],'),
+    ],
+    # Menu translations: renamed entries keep their translations with the new name; entries that
+    # are gone, or whose meaning changed (Based on EffectCraft), lose their rows.
+    "crates/ui-egui/src/i18n.rs": [
+        remove(menu_row("help.discord", "Join the ArtCraft Discord..."), 13),
+        remove(menu_row("help.website", "ArtCraft Website"), 13),
+        remove(menu_row("help.appPage", "EffectCraft Home Page"), 13),
+        lines(r'^    \("help\.github", "EffectCraft on GitHub", .*$', "EffectCraft", "Cosmic", 13),
+        lines(r'^    \("help\.docs", "EffectCraft Help\.\.\.", .*$', "EffectCraft", "Cosmic", 13),
+        lines(r'^    \("file\.importProject", "EffectCraft Project\.\.\.", .*$', "EffectCraft", "Cosmic", 13),
+    ],
+    "crates/ui-egui/src/i18n/ui.rs": [
+        lines(r'^    \("Welcome to EffectCraft", .*$', "EffectCraft", "Cosmic", 11),
+        lines(r'^    \("EffectCraft project", .*$', "EffectCraft", "Cosmic", 11),
+        lines(r'^    \("EffectCraft on GitHub", .*$', "EffectCraft", "Cosmic", 11),
+        lines(r'^    \("Stored, but not used by EffectCraft yet", .*$', "EffectCraft", "Cosmic", 8),
+        lines(r'^    \("EffectCraft didn\'t quit normally last time\.", .*$', "EffectCraft", "Cosmic", 11),
+        lines(r'^    \(\n        "Hands-on tutorials that run inside EffectCraft\.[^\n]*\n[^\n]*\n    \),$', "EffectCraft", "Cosmic", 2),
+        remove(row("Join the ArtCraft Discord"), 11),
+        remove(row("Join the ArtCraft community on Discord"), 11),
+        remove(row("Discord"), 11),
+        remove(row("More ArtCraft apps"), 11),
+        remove(row("EffectCraft home page"), 11),
+        remove(row("EffectCraft on getartcraft.com"), 5),
+        remove(row("ArtCraft website"), 5),
+        remove(row("Source code on GitHub"), 5),
+    ],
+    # Home: welcome, the Recent list's kind, and the Community links.
+    "crates/ui-egui/src/panels/home.rs": [
+        exact('tr("Welcome to EffectCraft")', 'tr("Welcome to Cosmic")'),
+        exact('"EffectCraft project"', '"Cosmic project"', count=3),
+        exact(
+            "    let links = [\n"
+            '        (Icon::Chat, "Join the ArtCraft Discord", "help.discord"),\n'
+            '        (Icon::Globe, "getartcraft.com", "help.website"),\n'
+            '        (Icon::Globe, "EffectCraft home page", "help.appPage"),\n'
+            '        (Icon::Code, "EffectCraft on GitHub", "help.github"),\n'
+            "    ];\n"
+            "    let sib = effectcraft_engine::links::SIBLINGS;\n",
+            "    // Cosmic fork: Cosmic's repository and a credit to EffectCraft; no ArtCraft links or apps.\n"
+            '    let links = [(Icon::Code, "Cosmic on GitHub", "help.github"), (Icon::Globe, "Based on EffectCraft", "help.appPage")];\n'
+            "    let sib: &[(&str, &str)] = &[];\n",
+        ),
+        remove(r'^    p\.text\(pos2\(x0, cy \+ 8\.0\), Align2::LEFT_CENTER, tr\("More ArtCraft apps"\), Tokens::ui\(11\.0\), t\.text_faint\);\n    cy \+= 20\.0;\n', 1),
+        # The Home test's list of controls: the Discord link is gone.
+        remove(r'^            "home\.help\.discord",\n', 1),
+    ],
+    # Header: no Discord pill or website button; the GitHub button opens Cosmic's repository.
+    "crates/ui-egui/src/header.rs": [
+        remove(
+            r"^    // The pill fits its label \(icon, gap, text\) with even padding: it was a fixed 104 px with the\n"
+            r"[\s\S]*?^    rx = discord\.min\.x - 6\.0;\n",
+            1,
+        ),
+        exact(
+            "    for (id, icon, tip, cmd) in\n"
+            '        [("hdr-github", Icon::Code, "EffectCraft on GitHub", "help.github"), ("hdr-web", Icon::Globe, "EffectCraft on getartcraft.com", "help.appPage")]\n'
+            "    {",
+            '    for (id, icon, tip, cmd) in [("hdr-github", Icon::Code, "Cosmic on GitHub", "help.github")] {',
+        ),
+    ],
+    "crates/ui-egui/tests/it/ui_panels.rs": [
+        remove(r"^/// #581: the header's Discord pill[\s\S]*?^}\n\n", 1),
+    ],
+    # About: the same two links as Home.
+    "crates/ui-egui/src/panels/dialogs.rs": [
+        exact(
+            "    let links: [(Icon, &str, &str, &'static str); 4] = [\n"
+            '        (Icon::Chat, "Join the ArtCraft Discord", effectcraft_engine::links::DISCORD, "help.discord"),\n'
+            '        (Icon::Globe, "ArtCraft website", effectcraft_engine::links::WEBSITE, "help.website"),\n'
+            '        (Icon::Sparkle, "EffectCraft home page", effectcraft_engine::links::APP_PAGE, "help.appPage"),\n'
+            '        (Icon::Code, "Source code on GitHub", effectcraft_engine::links::GITHUB, "help.github"),\n'
+            "    ];",
+            "    let links: [(Icon, &str, &str, &'static str); 2] = [\n"
+            '        (Icon::Code, "Cosmic on GitHub", effectcraft_engine::links::GITHUB, "help.github"),\n'
+            '        (Icon::Sparkle, "Based on EffectCraft", effectcraft_engine::links::UPSTREAM, "help.appPage"),\n'
+            "    ];",
+        ),
+    ],
+    # Open/Save dialogs, crash and graphics messages (reports go to Cosmic's issue tracker).
+    "apps/effectcraft/src/file_dialogs.rs": [
+        exact('"EffectCraft Project"', '"Cosmic Project"', count=4),
+    ],
+    "apps/effectcraft/src/main.rs": [
+        exact("Reopen EffectCraft to recover them.", "Reopen Cosmic to recover them."),
+        exact("so EffectCraft has to close.", "so Cosmic has to close."),
+        exact(
+            '"EffectCraft couldn\'t start its window: {e}\\n\\n{next}Updating the graphics driver often helps. If it keeps happening, please report it at https://github.com/storytold/effectcraft/issues with this message."',
+            '"Cosmic couldn\'t start its window: {e}\\n\\n{next}Updating the graphics driver often helps. If it keeps happening, please report it at https://github.com/RkzG/cosmic/issues with this message."',
+        ),
+        # rustfmt joins the call once its strings are shorter.
+        exact(
+            "                    file_dialogs::message(\n"
+            '                        "Cosmic: graphics device lost",\n'
+            '                        format!("The graphics driver stopped responding, so Cosmic has to close.{saved}"),\n'
+            "                    );",
+            '                    file_dialogs::message("Cosmic: graphics device lost", format!("The graphics driver stopped responding, so Cosmic has to close.{saved}"));',
+        ),
+    ],
+    "apps/effectcraft/build.rs": [
+        exact('.set("OriginalFilename", "effectcraft.exe")', '.set("OriginalFilename", "cosmic.exe")'),
+        exact('.set("InternalName", "effectcraft")', '.set("InternalName", "cosmic")'),
+    ],
+    # Settings and Learn.
+    "crates/ui-egui/src/panels/settings.rs": [
+        exact('tr("Stored, but not used by EffectCraft yet")', 'tr("Stored, but not used by Cosmic yet")'),
+        exact("EffectCraft keeps", "Cosmic keeps", count=5),
+        exact('tr("Restart EffectCraft to finish")', 'tr("Restart Cosmic to finish")'),
+        exact('tr("Needs a newer EffectCraft")', 'tr("Needs a newer Cosmic")'),
+        exact('tr("EffectCraft didn\'t quit normally last time.")', 'tr("Cosmic didn\'t quit normally last time.")'),
+    ],
+    "crates/ui-egui/src/panels/learn.rs": [
+        exact("Hands-on tutorials that run inside EffectCraft.", "Hands-on tutorials that run inside Cosmic."),
+    ],
+    # Folders the user sees on disk.
+    "crates/engine/src/settings/autosave.rs": [
+        exact('pub const AUTOSAVE_FOLDER: &str = "EffectCraft Auto-Save";', 'pub const AUTOSAVE_FOLDER: &str = "Cosmic Auto-Save";'),
+    ],
+    "crates/engine/src/system/logging.rs": [
+        exact('log_dir(config_dir).join("EffectCraft Log.txt")', 'log_dir(config_dir).join("Cosmic Log.txt")'),
+    ],
+    "crates/ui-egui/src/panels/effects_presets.rs": [
+        exact("/// Where user presets live: `$EC_PRESETS_DIR`, else `~/Documents/EffectCraft/Presets`.", "/// Where user presets live: `$EC_PRESETS_DIR`, else `~/Documents/Cosmic/Presets`."),
+        exact('.join("Documents").join("EffectCraft").join("Presets")', '.join("Documents").join("Cosmic").join("Presets")'),
+    ],
+    "crates/ui-egui/tests/it/ui_presets_folder.rs": [
+        exact('join("Documents/EffectCraft/Presets")', 'join("Documents/Cosmic/Presets")'),
+    ],
+}
+for _path, _edits in MORE.items():
+    EDITS.setdefault(_path, []).extend(_edits)
+
+
 def main() -> int:
     check = "--check" in sys.argv[1:]
     failed = pending = 0

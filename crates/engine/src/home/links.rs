@@ -6,8 +6,10 @@ pub const APP_SLUG: &str = "effectcraft";
 pub const DISCORD: &str = "https://discord.gg/artcraft";
 pub const WEBSITE: &str = "https://getartcraft.com";
 pub const APP_PAGE: &str = "https://getartcraft.com/apps/effectcraft";
-pub const GITHUB: &str = "https://github.com/storytold/effectcraft";
-pub const ISSUES: &str = "https://github.com/storytold/effectcraft/issues";
+// Cosmic fork: Help, About and Home link to Cosmic's repository; UPSTREAM credits EffectCraft.
+pub const GITHUB: &str = "https://github.com/RkzG/cosmic";
+pub const ISSUES: &str = "https://github.com/RkzG/cosmic/issues";
+pub const UPSTREAM: &str = "https://github.com/storytold/effectcraft";
 
 /// Sibling apps of the ArtCraft family: (name, what it is, GitHub repo, app page).
 pub const SIBLINGS: &[(&str, &str)] = &[

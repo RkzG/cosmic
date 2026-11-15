@@ -16,8 +16,8 @@ fn main() {
         .set("ProductName", "Cosmic")
         .set("FileDescription", "Cosmic video editor (based on EffectCraft)")
         .set("LegalCopyright", "Copyright (c) 2026 The EffectCraft contributors and the Cosmic contributors. MIT OR Apache-2.0.")
-        .set("OriginalFilename", "effectcraft.exe")
-        .set("InternalName", "effectcraft");
+        .set("OriginalFilename", "cosmic.exe")
+        .set("InternalName", "cosmic");
     if let Err(e) = res.compile() {
         if std::env::var_os("EFFECTCRAFT_REQUIRE_WINRES").is_some() {
             panic!("embedding Windows resources failed: {e}");

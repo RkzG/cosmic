@@ -410,14 +410,11 @@ fn run_desktop(reporter: &crash_report::Shutdown) -> eframe::Result {
             if control_port.is_none() {
                 app.hooks.device_lost = Some(Box::new(|saved: Option<Result<String, String>>| {
                     let saved = match saved {
-                        Some(Ok(path)) => format!("\n\nYour unsaved changes were saved to:\n{path}\n\nReopen EffectCraft to recover them."),
+                        Some(Ok(path)) => format!("\n\nYour unsaved changes were saved to:\n{path}\n\nReopen Cosmic to recover them."),
                         Some(Err(e)) => format!("\n\nYour unsaved changes could not be saved ({e})."),
                         None => String::new(),
                     };
-                    file_dialogs::message(
-                        "Cosmic: graphics device lost",
-                        format!("The graphics driver stopped responding, so EffectCraft has to close.{saved}"),
-                    );
+                    file_dialogs::message("Cosmic: graphics device lost", format!("The graphics driver stopped responding, so Cosmic has to close.{saved}"));
                 }));
             }
             app.hooks.system_theme = appearance::service();
@@ -511,7 +508,7 @@ fn device_limits(adapter: eframe::wgpu::Limits) -> eframe::wgpu::Limits {
 fn startup_failed(e: &eframe::Error, gl_next: bool) {
     let next = if gl_next { "The next launch will try OpenGL instead. " } else { "" };
     let message = format!(
-        "EffectCraft couldn't start its window: {e}\n\n{next}Updating the graphics driver often helps. If it keeps happening, please report it at https://github.com/storytold/effectcraft/issues with this message."
+        "Cosmic couldn't start its window: {e}\n\n{next}Updating the graphics driver often helps. If it keeps happening, please report it at https://github.com/RkzG/cosmic/issues with this message."
     );
     // Standard error and the session log; standard error alone when RUST_LOG turned errors off.
     if log::log_enabled!(log::Level::Error) {

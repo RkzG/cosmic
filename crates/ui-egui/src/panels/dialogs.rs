@@ -409,11 +409,9 @@ fn about_main(app: &mut EffectcraftApp, ui: &mut egui::Ui, t: &Tokens, cmd: &mut
     ui.add_space(12.0);
     ui.label(crate::cosmic_brand::ABOUT_BLURB);
     ui.add_space(14.0);
-    let links: [(Icon, &str, &str, &'static str); 4] = [
-        (Icon::Chat, "Join the ArtCraft Discord", effectcraft_engine::links::DISCORD, "help.discord"),
-        (Icon::Globe, "ArtCraft website", effectcraft_engine::links::WEBSITE, "help.website"),
-        (Icon::Sparkle, "EffectCraft home page", effectcraft_engine::links::APP_PAGE, "help.appPage"),
-        (Icon::Code, "Source code on GitHub", effectcraft_engine::links::GITHUB, "help.github"),
+    let links: [(Icon, &str, &str, &'static str); 2] = [
+        (Icon::Code, "Cosmic on GitHub", effectcraft_engine::links::GITHUB, "help.github"),
+        (Icon::Sparkle, "Based on EffectCraft", effectcraft_engine::links::UPSTREAM, "help.appPage"),
     ];
     for (icon, label, url, c) in links {
         let (r, resp) = ui.allocate_exact_size(vec2(ui.available_width(), 30.0), Sense::click());

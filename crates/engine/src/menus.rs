@@ -586,7 +586,7 @@ File
     Multiple Files... | file.importMultiple
     Adobe After Effects Project... | file.importAep
     Adobe Premiere Pro Project... | file.importTimeline
-    EffectCraft Project... | file.importProject
+    Cosmic Project... | file.importProject
     Vanishing Point (.vpe)... | file.importVanishingPoint
     Placeholder... | file.importPlaceholder
     Solid... | file.importSolid
@@ -1301,7 +1301,7 @@ Window
   VR Comp Editor | window.panel {"panel":"vrCompEditor"}
   @dynamic:scriptPanels
 Help
-  EffectCraft Help... | help.docs {"page":"help"} | F1
+  Cosmic Help... | help.docs {"page":"help"} | F1
   Scripting Help... | help.docs {"page":"scripting"}
   Expression Reference... | help.docs {"page":"expressions"}
   Effect Reference... | help.docs {"page":"effects"}
@@ -1315,12 +1315,10 @@ Help
   Enable Logging | help.enableLogging
   Reveal Logging File | help.revealLogFile
   ---
-  Join the ArtCraft Discord... | help.discord
   Provide Feedback... | help.reportIssue
   ---
-  ArtCraft Website | help.website
-  EffectCraft Home Page | help.appPage
-  EffectCraft on GitHub | help.github
+  Based on EffectCraft | help.appPage
+  Cosmic on GitHub | help.github
   Open Demo Project | file.openDemoProject
   [!mac] ---
   [!mac] About Cosmic... | app.about
