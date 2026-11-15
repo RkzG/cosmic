@@ -1795,7 +1795,12 @@ fn automation_roots_confine_the_footage_a_project_names() {
     let own = project("own.ecproj", &p(&read, "own.png"));
     let text = std::fs::read_to_string(&own).unwrap();
     assert!(text.contains(&p(&read, "own.png")) || text.contains("own.png"), "{text}");
-    let relative = text.replace(&p(&read, "own.png"), "../elsewhere/secret.png").replace("\"own.png\"", "\"../elsewhere/secret.png\"");
+    // The project file holds the footage path as a JSON string, where a Windows path's
+    // backslashes are escaped: replacing the raw path matched nothing there, so the "relative"
+    // project still named own.png and this case never ran on Windows.
+    let own_json = serde_json::to_string(&p(&read, "own.png")).unwrap();
+    let relative = text.replace(&own_json, "\"../elsewhere/secret.png\"").replace("\"own.png\"", "\"../elsewhere/secret.png\"");
+    assert!(!relative.contains(&own_json), "the footage path was not rewritten to the relative one: {relative}");
     std::fs::write(read.join("relative.ecproj"), relative).unwrap();
     projects.push(("relative", p(&read, "relative.ecproj")));
 
