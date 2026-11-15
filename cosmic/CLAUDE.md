@@ -58,7 +58,7 @@ Aturan ini **menggantikan** aturan CI di `AGENTS.md` upstream ("`cargo xtask ci`
 - **Rust**: hanya untuk bagian di dalam editor (panel AI, tampilan tahap, fitur kunci layer, modul efek baru).
 - **Go**: layanan AI (orkestrasi, pemanggilan model, penyusunan resep, riwayat dan preferensi). Ini bahasa utama Franz, jadi logika sebanyak mungkin ditaruh di sini.
 - **Python**: worker analisis video (deteksi cut, beat, gerakan) bila library-nya tidak ada padanan di Go.
-- Komunikasi layanan Go ke editor memakai jalur yang sudah ada: MCP (`effectcraft-cli mcp`), control channel (`--control PORT`), CLI, atau `script FILE.jsx`. Jangan membuat protokol baru selama yang lama cukup.
+- Komunikasi layanan Go ke editor memakai jalur yang sudah ada: MCP (`cosmic-cli mcp`, server `cosmic` dan `cosmic-live`), control channel (`--control PORT`), CLI, atau `script FILE.jsx`. Jangan membuat protokol baru selama yang lama cukup.
 
 ## Prinsip AI sebagai rekan kerja
 
@@ -71,7 +71,8 @@ Aturan ini **menggantikan** aturan CI di `AGENTS.md` upstream ("`cargo xtask ci`
 ## Lingkungan Franz
 
 - Windows, laptop dengan RTX 4070 (laptop) dan RAM 32 GB.
-- EffectCraft rilis terpasang di `F:\Program\effectCraft` (CLI: `effectcraft-cli.exe`, belum masuk PATH).
+- EffectCraft rilis terpasang di `F:\Program\effectCraft` (CLI: `effectcraft-cli.exe`, belum masuk PATH), sebagai pembanding lewat server MCP `effectcraft` dan `effectcraft-live`.
+- Build lokal Cosmic dipasang di `D:\Coding\Cosmicin` sebagai `cosmic.exe` dan `cosmic-cli.exe` lewat `cosmic/scripts/install-local.ps1`, yang juga mendaftarkan server MCP `cosmic` dan `cosmic-live` (port 9878). Di `targetelease` namanya tetap `effectcraft.exe` dan `effectcraft-cli.exe`.
 - Proyek uji ada di `D:\Editing\EffectCraft\` dan `D:\Editing\EffectCraft\mcp-test\`.
 - Shell utama PowerShell. Lihat jebakan PowerShell di `cosmic/docs/EFFECTCRAFT-NOTES.md`.
 
