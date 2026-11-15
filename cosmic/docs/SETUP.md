@@ -34,21 +34,25 @@ Ini satu-satunya perubahan pada file upstream di tahap ini, dan sudah tercatat d
 
 Ikuti instruksi build di README atau CONTRIBUTING upstream. Setelah berhasil, jalankan editor hasil build, buka proyek uji, dan render untuk memastikan semuanya jalan.
 
-## 4. MCP untuk Claude Code
+## 4. Pasang build lokal dan MCP untuk Claude Code
 
-Untuk pengembangan, versi rilis di `F:\Program\effectCraft` tetap bisa dipakai sebagai pembanding. Setelah fork ter-build, arahkan pendaftaran MCP ke binary hasil build.
-
-Daftarkan dengan scope user supaya berlaku di semua folder. Di PowerShell, `--` wajib diberi tanda kutip:
+Setelah build release, jalankan:
 
 ```powershell
-claude mcp add --scope user effectcraft '--' "<path>\effectcraft-cli.exe" mcp --autosave --automation-read-root "D:\Editing\EffectCraft" --automation-write-root "D:\Editing\EffectCraft\mcp-test"
-
-claude mcp add --scope user effectcraft-live '--' "<path>\effectcraft-cli.exe" mcp --bridge 9877 --automation-read-root "D:\Editing\EffectCraft" --automation-write-root "D:\Editing\EffectCraft\mcp-test"
+cargo build --release -p effectcraft -p effectcraft-cli
+powershell -ExecutionPolicy Bypass -File cosmic/scripts/install-local.ps1
 ```
 
-Pendaftaran lama (scope lokal di `F:\Program\effectCraft`) dihapus dulu dari folder itu dengan `claude mcp remove effectcraft` dan `claude mcp remove effectcraft-live`.
+Skrip ini:
 
-Mode bridge butuh editor dibuka dengan `--control 9877`.
+- menyalin `targetelease\effectcraft.exe` dan `effectcraft-cli.exe` ke `D:\Coding\Cosmicin` sebagai **`cosmic.exe`** dan **`cosmic-cli.exe`** (di `targetelease` namanya tetap nama Cargo upstream, supaya sinkron upstream tetap mudah);
+- mendaftarkan ulang server MCP scope user **`cosmic`** (headless, `--autosave`) dan **`cosmic-live`** (bridge ke port **9878**) ke `cosmic-cli.exe`.
+
+Mode `cosmic-live` butuh Cosmic dibuka dengan `D:\Coding\Cosmicin\cosmic.exe --control 9878`.
+
+Windows tidak bisa menimpa exe yang sedang berjalan. Kalau skrip menolak karena `cosmic.exe` atau `cosmic-cli.exe` masih jalan, tutup aplikasinya dan sesi Claude Code yang memakai server MCP-nya, lalu ulangi.
+
+Pendaftaran **`effectcraft`** dan **`effectcraft-live`** (scope lokal di `F:\Program\effectCraft`, versi rilis) tetap mengarah ke EffectCraft rilis sebagai pembanding; skrip tidak menyentuhnya. Di PowerShell, `--` pada `claude mcp add` wajib diberi tanda kutip (`'--'`).
 
 ## 5. Rutinitas sinkron upstream
 

@@ -4,12 +4,15 @@
 //! In order:
 //! 1. `EFFECTCRAFT_CONFIG_DIR`, when set (tests, agents, custom setups).
 //! 2. **Portable mode** (#993): a marker file ([`PORTABLE_MARKERS`]) beside the executable puts
-//!    everything in `<exe dir>/EffectCraftData`, so a portable copy on a USB stick leaves nothing in
+//!    everything in `<exe dir>/CosmicData`, so a portable copy on a USB stick leaves nothing in
 //!    `%APPDATA%`. The Windows portable zip ships with `portable.txt`; the MSI doesn't. If that
 //!    folder can't be written (read-only medium, Program Files), a warning is logged and the
 //!    platform folder is used.
-//! 3. The platform convention: macOS `~/Library/Application Support/EffectCraft`, Windows
-//!    `%APPDATA%\EffectCraft`, Linux `$XDG_CONFIG_HOME/effectcraft` or `~/.config/effectcraft`.
+//! 3. The platform convention: macOS `~/Library/Application Support/Cosmic`, Windows
+//!    `%APPDATA%\Cosmic`, Linux `$XDG_CONFIG_HOME/cosmic` or `~/.config/cosmic`.
+//!
+//! Cosmic fork: the folder names differ from upstream EffectCraft so the two apps never share
+//! settings, shortcuts or crash recovery (see cosmic/docs/UPSTREAM-PATCHES.md).
 
 use std::ffi::OsString;
 use std::path::{Path, PathBuf};
@@ -18,14 +21,14 @@ use std::sync::OnceLock;
 /// Files beside the executable that switch on portable mode (either one; contents are ignored).
 pub const PORTABLE_MARKERS: [&str; 2] = ["portable.txt", "EffectCraft.portable"];
 /// The data folder created beside the executable in portable mode.
-pub const PORTABLE_DATA_DIR: &str = "EffectCraftData";
+pub const PORTABLE_DATA_DIR: &str = "CosmicData";
 
 /// How [`DataDir::dir`] was chosen.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Mode {
     /// `EFFECTCRAFT_CONFIG_DIR`.
     Override,
-    /// `<exe dir>/EffectCraftData`.
+    /// `<exe dir>/CosmicData`.
     Portable,
     /// The platform's per-user config directory.
     Platform,
@@ -79,12 +82,12 @@ pub fn resolve(env: impl Fn(&str) -> Option<OsString>, exe_dir: Option<&Path>) -
 pub fn platform_dir(env: &impl Fn(&str) -> Option<OsString>) -> Option<PathBuf> {
     let home = || env("HOME").map(PathBuf::from);
     if cfg!(target_os = "macos") {
-        return home().map(|h| h.join("Library/Application Support/EffectCraft"));
+        return home().map(|h| h.join("Library/Application Support/Cosmic"));
     }
     if cfg!(target_os = "windows") {
-        return env("APPDATA").map(|a| PathBuf::from(a).join("EffectCraft"));
+        return env("APPDATA").map(|a| PathBuf::from(a).join("Cosmic"));
     }
-    env("XDG_CONFIG_HOME").map(PathBuf::from).or_else(|| home().map(|h| h.join(".config"))).map(|c| c.join("effectcraft"))
+    env("XDG_CONFIG_HOME").map(PathBuf::from).or_else(|| home().map(|h| h.join(".config"))).map(|c| c.join("cosmic"))
 }
 
 /// The first portable marker file in `exe_dir`, if any.
@@ -138,11 +141,11 @@ mod tests {
         assert!(d.warning.is_none());
         let dir = d.dir.unwrap();
         if cfg!(target_os = "macos") {
-            assert_eq!(dir, root.join("home/Library/Application Support/EffectCraft"));
+            assert_eq!(dir, root.join("home/Library/Application Support/Cosmic"));
         } else if cfg!(target_os = "windows") {
-            assert_eq!(dir, root.join("appdata").join("EffectCraft"));
+            assert_eq!(dir, root.join("appdata").join("Cosmic"));
         } else {
-            assert_eq!(dir, root.join("home/.config/effectcraft"));
+            assert_eq!(dir, root.join("home/.config/cosmic"));
         }
         assert!(!exe.join(PORTABLE_DATA_DIR).exists(), "no portable folder without a marker");
         let _ = std::fs::remove_dir_all(&root);
@@ -159,7 +162,7 @@ mod tests {
             assert_eq!(d.mode, Mode::Portable, "{marker}");
             assert!(d.warning.is_none());
             let dir = d.dir.unwrap();
-            assert_eq!(dir, exe.join("EffectCraftData"));
+            assert_eq!(dir, exe.join("CosmicData"));
             assert!(dir.is_dir(), "the data folder is created");
             assert_eq!(std::fs::read_dir(&dir).unwrap().count(), 0, "the write probe is removed");
             assert!(!root.join("home").exists() && !root.join("appdata").exists(), "nothing written to the user folder");

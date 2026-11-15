@@ -1,0 +1,8 @@
+asset:        cosmic-128.png
+title:        Cosmic app icon, 128 px render (window and taskbar icon, Tools bar and About logo)
+author:       Cosmic contributors
+source:       original work
+license:      MIT OR Apache-2.0
+license-file: LICENSE-MIT, LICENSE-APACHE
+added:        2026-11-15 by Cosmic contributors (Claude agent, app icon)
+notes:        Rendered from cosmic/assets/app-icon/cosmic.svg by cosmic/assets/app-icon/render_icons.py (headless Chrome screenshot; the .ico is assembled by the same script).

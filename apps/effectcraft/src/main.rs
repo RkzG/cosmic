@@ -51,11 +51,11 @@ fn test_child_spawn_lock() -> std::sync::MutexGuard<'static, ()> {
 /// `packaging/icons.sh`). macOS gets the padded variant so it sits on Apple's icon grid in the Dock.
 /// The 256 px app icon (Windows, Linux; the AppImage's desktop integration installs it too).
 #[cfg(not(target_os = "macos"))]
-const ICON_PNG: &[u8] = include_bytes!("../../../assets/app-icon/hicolor/256x256/apps/ai.storyteller.effectcraft.png");
+const ICON_PNG: &[u8] = include_bytes!("../../../cosmic/assets/app-icon/cosmic-256.png");
 
 fn app_icon() -> egui::IconData {
     #[cfg(target_os = "macos")]
-    let png: &[u8] = include_bytes!("../../../assets/app-icon/effectcraft-macos-512.png");
+    let png: &[u8] = include_bytes!("../../../cosmic/assets/app-icon/cosmic-macos-512.png");
     #[cfg(not(target_os = "macos"))]
     let png: &[u8] = ICON_PNG;
     eframe::icon_data::from_png_bytes(png).unwrap_or_default()
@@ -196,7 +196,7 @@ fn start_helpers_if_opted_in(session: &mut effectcraft_engine::Session) {
 fn main() -> eframe::Result {
     let args: Vec<_> = std::env::args_os().skip(1).collect();
     if crash_report::maybe_run(&args, |description| {
-        file_dialogs::message("EffectCraft diagnostic report", description.to_owned());
+        file_dialogs::message("Cosmic diagnostic report", description.to_owned());
     }) {
         return Ok(());
     }
@@ -272,7 +272,7 @@ fn run_desktop(reporter: &crash_report::Shutdown) -> eframe::Result {
     let notice = launch.notice.take();
     let options = eframe::NativeOptions {
         viewport: egui::ViewportBuilder::default()
-            .with_title("EffectCraft")
+            .with_title("Cosmic")
             .with_inner_size(window::DEFAULT_SIZE)
             .with_min_inner_size(window::MIN_SIZE)
             .with_drag_and_drop(true)
@@ -296,7 +296,7 @@ fn run_desktop(reporter: &crash_report::Shutdown) -> eframe::Result {
     let apple_events = &apple_events;
     let desktop_reporter = reporter.clone();
     let result = eframe::run_native(
-        "EffectCraft",
+        "Cosmic",
         options,
         Box::new(move |cc| {
             EffectcraftApp::install_ime_reset_hooks(&cc.egui_ctx);
@@ -410,14 +410,11 @@ fn run_desktop(reporter: &crash_report::Shutdown) -> eframe::Result {
             if control_port.is_none() {
                 app.hooks.device_lost = Some(Box::new(|saved: Option<Result<String, String>>| {
                     let saved = match saved {
-                        Some(Ok(path)) => format!("\n\nYour unsaved changes were saved to:\n{path}\n\nReopen EffectCraft to recover them."),
+                        Some(Ok(path)) => format!("\n\nYour unsaved changes were saved to:\n{path}\n\nReopen Cosmic to recover them."),
                         Some(Err(e)) => format!("\n\nYour unsaved changes could not be saved ({e})."),
                         None => String::new(),
                     };
-                    file_dialogs::message(
-                        "EffectCraft: graphics device lost",
-                        format!("The graphics driver stopped responding, so EffectCraft has to close.{saved}"),
-                    );
+                    file_dialogs::message("Cosmic: graphics device lost", format!("The graphics driver stopped responding, so Cosmic has to close.{saved}"));
                 }));
             }
             app.hooks.system_theme = appearance::service();
@@ -511,7 +508,7 @@ fn device_limits(adapter: eframe::wgpu::Limits) -> eframe::wgpu::Limits {
 fn startup_failed(e: &eframe::Error, gl_next: bool) {
     let next = if gl_next { "The next launch will try OpenGL instead. " } else { "" };
     let message = format!(
-        "EffectCraft couldn't start its window: {e}\n\n{next}Updating the graphics driver often helps. If it keeps happening, please report it at https://github.com/storytold/effectcraft/issues with this message."
+        "Cosmic couldn't start its window: {e}\n\n{next}Updating the graphics driver often helps. If it keeps happening, please report it at https://github.com/RkzG/cosmic/issues with this message."
     );
     // Standard error and the session log; standard error alone when RUST_LOG turned errors off.
     if log::log_enabled!(log::Level::Error) {
@@ -519,7 +516,7 @@ fn startup_failed(e: &eframe::Error, gl_next: bool) {
     } else {
         eprintln!("effectcraft: {message}");
     }
-    file_dialogs::message("EffectCraft", message);
+    file_dialogs::message("Cosmic", message);
 }
 
 /// The desktop app: the egui app plus, on macOS, the system menu bar.
