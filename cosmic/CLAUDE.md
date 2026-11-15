@@ -42,7 +42,7 @@ Proyek upstream bergerak sangat cepat (commit pertama 1 Oktober 2026, sudah v0.2
 - Jangan merapikan, memformat ulang, atau me-refactor kode upstream yang tidak terkait tugas.
 - Pertahankan `LICENSE*`, `NOTICE`, dan `ATTRIBUTION.md`. Nama dan merek "EffectCraft" punya aturan tersendiri, jadi aplikasi ini bernama **Cosmic** (repo `RkzG/cosmic`).
 - Penggabungan upstream dilakukan rutin: `git fetch upstream` lalu `git merge upstream/main` di branch terpisah, uji, baru gabung ke branch utama.
-- Kerja selalu di branch cosmic/<nama-fase-atau-tugas>, commit per langkah kecil. Setelah fase selesai, push branch lalu buat PR ke main di RkzG/cosmic (pakai --repo RkzG/cosmic --base main). Jangan pernah membuat PR ke storytold/effectcraft, dan jangan merge tanpa persetujuan saya.
+- Kerja selalu di branch `cosmic/<nama-fase-atau-tugas>`, commit per langkah kecil, lalu push branch itu ke `origin`. **Berhenti di situ: jangan membuat PR dan jangan merge.** Setelah push, berikan Franz link compare `https://github.com/RkzG/cosmic/compare/main...<nama-branch>` dan draft deskripsi PR, supaya Franz yang membuat PR ke `main`. Jangan pernah membuat PR ke `storytold/effectcraft`.
 
 ## Pembagian bahasa dan komponen
 
