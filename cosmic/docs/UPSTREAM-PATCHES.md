@@ -10,6 +10,7 @@ Fitur baru sebaiknya berada di file atau modul baru, sehingga daftar ini tetap p
 | --- | --- | --- | --- | --- |
 | 2026-11-15 | `CLAUDE.md` (root) | Supaya Claude Code memuat panduan Cosmic | Tambah satu baris `@cosmic/CLAUDE.md` di akhir file | |
 | 2026-11-15 | `ATTRIBUTION.md` | Aturan aset upstream: setiap aset wajib tercatat di indeks (`cargo xtask assets`) | Tambah bagian baru "Cosmic fork assets" di **akhir** file. Saat sinkron upstream bentrok, pertahankan isi upstream lalu tempel ulang bagian ini di akhir | |
+| 2026-11-15 | `crates/automation/src/tests.rs` | Perbaikan test, **layak dikirim ke upstream**: di Windows kasus "relative" pada `automation_roots_confine_the_footage_a_project_names` tidak pernah dijalankan (path dicari tanpa escape JSON), sehingga test gagal palsu | Path footage dicari dalam bentuk JSON (`serde_json::to_string`), plus assert bahwa path benar-benar terganti. Kalau upstream sudah memperbaikinya, ambil versi upstream dan hapus baris ini | |
 
 ## Rebrand tampilan (Cosmic)
 
