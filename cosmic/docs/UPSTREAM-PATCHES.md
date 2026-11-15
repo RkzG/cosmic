@@ -13,7 +13,7 @@ Fitur baru sebaiknya berada di file atau modul baru, sehingga daftar ini tetap p
 
 ## Rebrand tampilan (Cosmic)
 
-Semua perubahan teks, ikon, dan folder pengaturan pada file upstream (**27 file**) dilakukan oleh **`cosmic/tools/rebrand.py`**. Ditambah 2 file yang diubah manual (`CLAUDE.md`, `ATTRIBUTION.md`, tabel di atas), totalnya 29 file upstream. Pengujian 2026-11-15: ke-27 file dikembalikan ke versi `upstream/main`, skrip dijalankan, hasilnya identik. Daftar persis setiap penggantian ada di variabel `EDITS` di skrip itu.
+Semua perubahan teks, ikon, dan folder pengaturan pada file upstream (**28 file**) dilakukan oleh **`cosmic/tools/rebrand.py`**. Ditambah 2 file yang diubah manual (`CLAUDE.md`, `ATTRIBUTION.md`, tabel di atas), totalnya 30 file upstream. Pengujian 2026-11-15: ke-27 file (sebelum `store.rs` ditambahkan) dikembalikan ke versi `upstream/main`, skrip dijalankan, hasilnya identik. Daftar persis setiap penggantian ada di variabel `EDITS` di skrip itu.
 
 Saat sinkron upstream:
 1. Kalau salah satu file di bawah bentrok, ambil versi upstream (`git checkout --theirs <file>`), lalu jalankan `python -I cosmic/tools/rebrand.py`.
@@ -51,6 +51,7 @@ Saat sinkron upstream:
 | 2026-11-15 | `crates/ui-egui/src/panels/settings.rs` | Teks Settings (termasuk test-nya) | "Restart Cosmic to finish", "Needs a newer Cosmic", "Cosmic didn't quit normally last time.", "Cosmic keeps …", "Stored, but not used by Cosmic yet" |
 | 2026-11-15 | `crates/ui-egui/src/panels/learn.rs` | Tab Learn | "Hands-on tutorials that run inside Cosmic." |
 | 2026-11-15 | `crates/engine/src/settings/autosave.rs` | Folder di disk | `Cosmic Auto-Save` |
+| 2026-11-15 | `apps/effectcraft-web/src/store.rs` | Test penyimpanan versi web memakai nama folder auto-save | `/Cosmic Auto-Save/Untitled Project auto-save 1.ecproj` |
 | 2026-11-15 | `crates/engine/src/system/logging.rs` | File log | `Cosmic Log.txt` |
 | 2026-11-15 | `crates/ui-egui/src/panels/effects_presets.rs`, `crates/ui-egui/tests/it/ui_presets_folder.rs` | Folder preset | `Documents\Cosmic\Presets` |
 

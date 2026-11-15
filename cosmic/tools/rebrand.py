@@ -375,6 +375,13 @@ MORE = {
     "crates/engine/src/settings/autosave.rs": [
         exact('pub const AUTOSAVE_FOLDER: &str = "EffectCraft Auto-Save";', 'pub const AUTOSAVE_FOLDER: &str = "Cosmic Auto-Save";'),
     ],
+    # The web build's store test names the auto-save folder of an untitled project.
+    "apps/effectcraft-web/src/store.rs": [
+        exact(
+            'Path::new("/EffectCraft Auto-Save/Untitled Project auto-save 1.ecproj")',
+            'Path::new("/Cosmic Auto-Save/Untitled Project auto-save 1.ecproj")',
+        ),
+    ],
     "crates/engine/src/system/logging.rs": [
         exact('log_dir(config_dir).join("EffectCraft Log.txt")', 'log_dir(config_dir).join("Cosmic Log.txt")'),
     ],
