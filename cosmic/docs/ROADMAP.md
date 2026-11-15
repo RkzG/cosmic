@@ -22,6 +22,7 @@ Kerjakan berurutan. Setiap fase punya kriteria selesai; jangan lanjut sebelum kr
 - [ ] Pengecekan update (`crates/ui-egui/src/lib.rs`, `UPDATE_APP`) masih memeriksa rilis EffectCraft. Matikan atau arahkan ke rilis Cosmic.
 - [ ] "Online Tutorials..." di menu Help masih membuka `getartcraft.com/apps/effectcraft`.
 - [ ] Perintah `help.discord`, `help.website`, `help.sibling` masih terdaftar (bisa dipanggil lewat command palette, CLI, MCP) walau tidak ada lagi di UI.
+- [ ] **Sebelum Fase 1 memakai `--automation-read-root`:** test upstream `automation_roots_confine_the_footage_a_project_names` gagal di Windows (juga di upstream): footage dengan path relatif di luar read root tetap terbaca. Selidiki dan pastikan batas akses file AI benar di Windows (lihat `EFFECTCRAFT-NOTES.md`).
 
 ## Fase 1: Format resep dan penerjemah
 
