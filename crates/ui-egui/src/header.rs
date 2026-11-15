@@ -40,9 +40,9 @@ fn brand_and_home(app: &mut EffectcraftApp, ui: &mut egui::Ui, p: &egui::Painter
     let brand = Rect::from_min_size(pos2(x, cy - 12.0), vec2(24.0, 24.0));
     paint_logo(p, brand);
     let bresp = ui.interact(brand, egui::Id::unique("brand"), Sense::click());
-    app.auto.add_response("header.about", &bresp, "About EffectCraft");
+    app.auto.add_response("header.about", &bresp, "About Cosmic");
     widgets::focus_outline(ui, &bresp, &t);
-    if bresp.on_hover_text(tr("About EffectCraft")).clicked() {
+    if bresp.on_hover_text(tr("About Cosmic")).clicked() {
         app.dialog = Some(Dialog::About);
     }
     x += 32.0;
@@ -901,9 +901,9 @@ fn run_workspace_command(app: &mut EffectcraftApp, ui: &egui::Ui, id: &str) {
     }
 }
 
-/// The ArtCraft mark as supplied in `docs/brand` (the README's and getartcraft.com's logo; used
-/// unmodified, see `docs/brand/LICENSE-brand.txt`).
-static ARTCRAFT_MARK: &[u8] = include_bytes!("../../../docs/brand/artcraft-mark.png");
+/// Cosmic fork: the Cosmic logo replaces the ArtCraft mark, which the ArtCraft brand terms
+/// (`docs/brand/LICENSE-brand.txt`) require modified versions to remove.
+static ARTCRAFT_MARK: &[u8] = crate::cosmic_brand::LOGO_PNG;
 
 /// The ArtCraft mark in `r` (decoded once into a mipmapped texture, so it stays crisp from the
 /// 24 px Tools bar to the About dialog). Nothing is drawn if it can't be decoded.

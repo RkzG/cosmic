@@ -468,7 +468,7 @@ pub(crate) fn submenu(app: &EffectcraftApp, source: &str, shown: String) -> Stri
 /// pull request for the rows taken from #321.
 const SIMPLIFIED_CHINESE: &[(&str, &str, &str)] = &[
     ("", "EffectCraft", "EffectCraft"),
-    ("app.about", "About EffectCraft...", "关于 EffectCraft..."),
+    ("app.about", "About Cosmic...", "关于 Cosmic..."),
     ("", "Settings...", "设置..."),
     ("app.settings", "General...", "常规..."),
     ("app.settings", "Startup & Repair...", "启动和修复..."),
@@ -1108,7 +1108,7 @@ const SIMPLIFIED_CHINESE: &[(&str, &str, &str)] = &[
 /// Swedish (`sv`), written from the English source.
 const SWEDISH: &[(&str, &str, &str)] = &[
     ("", "EffectCraft", "EffectCraft"),
-    ("app.about", "About EffectCraft...", "Om EffectCraft..."),
+    ("app.about", "About Cosmic...", "Om Cosmic..."),
     ("", "Settings...", "Inställningar..."),
     ("app.settings", "General...", "Allmänt..."),
     ("app.settings", "Startup & Repair...", "Start och reparation..."),
@@ -1750,7 +1750,7 @@ const SWEDISH: &[(&str, &str, &str)] = &[
 /// vocabulary the sibling Craft apps' zh-hant catalogs use.
 const TRADITIONAL_CHINESE: &[(&str, &str, &str)] = &[
     ("", "EffectCraft", "EffectCraft"),
-    ("app.about", "About EffectCraft...", "關於 EffectCraft..."),
+    ("app.about", "About Cosmic...", "關於 Cosmic..."),
     ("", "Settings...", "設定..."),
     ("app.settings", "General...", "一般..."),
     ("app.settings", "Startup & Repair...", "啟動和修復..."),
@@ -2389,7 +2389,7 @@ const TRADITIONAL_CHINESE: &[(&str, &str, &str)] = &[
 
 const JAPANESE: &[(&str, &str, &str)] = &[
     ("", "EffectCraft", "EffectCraft"),
-    ("app.about", "About EffectCraft...", "EffectCraftについて..."),
+    ("app.about", "About Cosmic...", "Cosmicについて..."),
     ("", "Settings...", "設定..."),
     ("app.settings", "General...", "一般..."),
     ("app.settings", "Startup & Repair...", "起動と修復..."),
@@ -3031,7 +3031,7 @@ const JAPANESE: &[(&str, &str, &str)] = &[
 /// The (command, source) keys match the other catalogs; no proprietary localization was used.
 const UKRAINIAN: &[(&str, &str, &str)] = &[
     ("", "EffectCraft", "EffectCraft"),
-    ("app.about", "About EffectCraft...", "Про EffectCraft..."),
+    ("app.about", "About Cosmic...", "Про Cosmic..."),
     ("", "Settings...", "Налаштування..."),
     ("app.settings", "General...", "Загальні..."),
     ("app.settings", "Startup & Repair...", "Запуск і відновлення..."),
@@ -3674,7 +3674,7 @@ const UKRAINIAN: &[(&str, &str, &str)] = &[
 /// names the feature, and macOS Spanish for the app menu.
 const SPANISH: &[(&str, &str, &str)] = &[
     ("", "EffectCraft", "EffectCraft"),
-    ("app.about", "About EffectCraft...", "Acerca de EffectCraft..."),
+    ("app.about", "About Cosmic...", "Acerca de Cosmic..."),
     ("", "Settings...", "Ajustes..."),
     ("app.settings", "General...", "General..."),
     ("app.settings", "Startup & Repair...", "Inicio y reparación..."),
@@ -4315,7 +4315,7 @@ const SPANISH: &[(&str, &str, &str)] = &[
 /// per fixed menu row of the engine's menu tree.
 const PORTUGUESE: &[(&str, &str, &str)] = &[
     ("", "EffectCraft", "EffectCraft"),
-    ("app.about", "About EffectCraft...", "Sobre o EffectCraft..."),
+    ("app.about", "About Cosmic...", "Sobre o Cosmic..."),
     ("", "Settings...", "Configurações..."),
     ("app.settings", "General...", "Geral..."),
     ("app.settings", "Startup & Repair...", "Inicialização e reparo..."),
@@ -4964,7 +4964,7 @@ const RUSSIAN: &[(&str, &str, &str)] = &[
     ("", "Back", "Задняя грань"),
     ("layer.addTextAnimator", "Color", "Цвет"),
     ("", "EffectCraft", "EffectCraft"),
-    ("app.about", "About EffectCraft...", "О EffectCraft..."),
+    ("app.about", "About Cosmic...", "О Cosmic..."),
     ("", "Settings...", "Настройки..."),
     ("app.settings", "General...", "Общие..."),
     ("app.settings", "Startup & Repair...", "Запуск и восстановление..."),
@@ -5605,7 +5605,7 @@ const FRENCH: &[(&str, &str, &str)] = &[
     ("", "Back", "Arrière"),
     ("layer.addTextAnimator", "Color", "Couleur"),
     ("", "EffectCraft", "EffectCraft"),
-    ("app.about", "About EffectCraft...", "À propos d’EffectCraft..."),
+    ("app.about", "About Cosmic...", "À propos d’Cosmic..."),
     ("", "Settings...", "Préférences..."),
     ("app.settings", "General...", "Général..."),
     ("app.settings", "Startup & Repair...", "Démarrage et réparation..."),
@@ -6246,7 +6246,7 @@ const GERMAN: &[(&str, &str, &str)] = &[
     ("", "Back", "Rückseite"),
     ("layer.addTextAnimator", "Color", "Farbe"),
     ("", "EffectCraft", "EffectCraft"),
-    ("app.about", "About EffectCraft...", "Über EffectCraft..."),
+    ("app.about", "About Cosmic...", "Über Cosmic..."),
     ("", "Settings...", "Voreinstellungen..."),
     ("app.settings", "General...", "Allgemein..."),
     ("app.settings", "Startup & Repair...", "Start und Reparatur..."),
@@ -6887,7 +6887,7 @@ const POLISH: &[(&str, &str, &str)] = &[
     ("", "Back", "Tył"),
     ("layer.addTextAnimator", "Color", "Kolor"),
     ("", "EffectCraft", "EffectCraft"),
-    ("app.about", "About EffectCraft...", "O programie EffectCraft..."),
+    ("app.about", "About Cosmic...", "O programie Cosmic..."),
     ("", "Settings...", "Ustawienia..."),
     ("app.settings", "General...", "Ogólne..."),
     ("app.settings", "Startup & Repair...", "Uruchamianie i naprawa..."),
@@ -7525,7 +7525,7 @@ const CZECH: &[(&str, &str, &str)] = &[
     ("", "Back", "Zadní strana"),
     ("layer.addTextAnimator", "Color", "Barva"),
     ("", "EffectCraft", "EffectCraft"),
-    ("app.about", "About EffectCraft...", "O aplikaci EffectCraft..."),
+    ("app.about", "About Cosmic...", "O aplikaci Cosmic..."),
     ("", "Settings...", "Nastavení..."),
     ("app.settings", "General...", "Obecné..."),
     ("app.settings", "Startup & Repair...", "Spuštění a oprava..."),
@@ -8163,7 +8163,7 @@ const CZECH: &[(&str, &str, &str)] = &[
 /// verbal nouns (შენახვა, გახსნა) and Georgian has no capital letters.
 const GEORGIAN: &[(&str, &str, &str)] = &[
     ("", "EffectCraft", "EffectCraft"),
-    ("app.about", "About EffectCraft...", "EffectCraft-ის შესახებ..."),
+    ("app.about", "About Cosmic...", "Cosmic-ის შესახებ..."),
     ("", "Settings...", "პარამეტრები..."),
     ("app.settings", "General...", "ზოგადი..."),
     ("app.settings", "Startup & Repair...", "გაშვება და აღდგენა..."),

@@ -533,7 +533,7 @@ fn effect_categories() -> Vec<MenuNode> {
 /// The After Effects menu layout. Labels use "..." like AE's macOS menus.
 pub const TREE: &str = r#"
 [mac] EffectCraft
-  About EffectCraft... | app.about
+  About Cosmic... | app.about
   ---
   Settings...
     General... | app.settings {"page":"general"} | Cmd+Alt+;
@@ -1323,7 +1323,7 @@ Help
   EffectCraft on GitHub | help.github
   Open Demo Project | file.openDemoProject
   [!mac] ---
-  [!mac] About EffectCraft... | app.about
+  [!mac] About Cosmic... | app.about
 "#;
 
 #[cfg(test)]

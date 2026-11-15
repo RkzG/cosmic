@@ -388,10 +388,9 @@ fn description(saved: &io::Result<PathBuf>, confirmed_exit: bool) -> String {
         Ok(path) => format!("A diagnostic report was saved to:\n{}", path.display()),
         Err(error) => format!("A diagnostic report could not be saved: {error}"),
     };
-    let incident =
-        if confirmed_exit { "EffectCraft stopped unexpectedly." } else { "EffectCraft lost its diagnostic control channel; process exit is not confirmed." };
+    let incident = if confirmed_exit { "Cosmic stopped unexpectedly." } else { "Cosmic lost its diagnostic control channel; process exit is not confirmed." };
     format!(
-        "{incident}\n\n{diagnostic}\n\nThe exact cause is unknown. If EffectCraft has closed, reopen it to check for an existing auto-save. Changes since the last auto-save may be lost.\n\nNo report has been sent anywhere."
+        "{incident}\n\n{diagnostic}\n\nThe exact cause is unknown. If Cosmic has closed, reopen it to check for an existing auto-save. Changes since the last auto-save may be lost.\n\nNo report has been sent anywhere."
     )
 }
 
