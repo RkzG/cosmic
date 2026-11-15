@@ -59,7 +59,11 @@ foreach ($s in $servers) {
     & claude mcp remove $s.name -s user 2>&1 | Out-Null
     $ErrorActionPreference = "Stop"
     # '--' is quoted: unquoted, PowerShell drops it and Claude reads the EffectCraft options as its own.
-    & claude mcp add --scope user $s.name '--' $cli @($s.args)
+    # The options are splatted from a variable (@serverArgs): `claude` is a PowerShell script
+    # (claude.ps1), and an array written as @(...) reaches it as one argument, which the CLI then
+    # rejects as one unknown subcommand ("mcp --autosave ...").
+    $serverArgs = $s.args
+    & claude mcp add --scope user $s.name '--' $cli @serverArgs
     if ($LASTEXITCODE -ne 0) { throw "claude mcp add $($s.name) failed" }
 }
 
