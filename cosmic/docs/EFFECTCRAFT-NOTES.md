@@ -46,6 +46,9 @@ Perbandingan fork (`cosmic/fase-0`) dengan `upstream/main` (`7cbefaf7`) memakai 
 | Tahap `wasm` butuh target `wasm32-unknown-unknown`, contoh plug-in `posterize-bands` gagal tanpa target itu | - | - | Cosmic hanya desktop Windows; wasm dilewati (lihat `cosmic/CLAUDE.md`). Target sudah terpasang kalau perlu. |
 | Test unit `ui-egui` sempat macet sekitar 18 menit (sekali, pukul 18:43) | tidak terulang | tidak terjadi | Tidak bisa direproduksi. Ulangan dengan `cargo test` biasa selesai dalam sekitar 6 detik di upstream (575 lulus) dan di fork setelah build bersih. Dengan `cargo nextest` di upstream: 575 lulus. Penyebab macet pertama tidak diketahui. |
 | Test integrasi `ui-egui` `ui_gpu::the_viewer_exposes_32_bpc_frames_on_the_gpu` gagal ("drawn by the display pass on the device") | gagal | gagal, pesan sama | Viewer 32 bpc tidak digambar lewat display pass GPU di laptop ini (RTX 4070 Laptop). Kemungkinan terkait GPU/driver Windows; penyebab pastinya belum diselidiki. Bukan dari Cosmic. |
+| Test `model` `tests::gltf_textures_naming_one_image_share_it` gagal (`left: 1, right: 2`) | gagal | gagal, pesan sama | Test mengganti teks di fixture `quad.gltf` yang ditulis dengan akhir baris `
+`. Kemungkinan besar akhir baris fixture berbeda di checkout Windows (`core.autocrlf=true`), sehingga penggantian tidak terjadi. Belum dipastikan. |
+| Test `automation` `tests::automation_roots_confine_the_footage_a_project_names` gagal ("relative: opened, the footage outside the roots was read") | gagal | gagal, pesan sama | Pembatasan `--automation-read-root` untuk footage dengan path relatif tidak berlaku di Windows pada test ini. Penyebab pastinya belum diselidiki. **Perlu diperhatikan untuk Cosmic**: batas akses file AI mungkin bocor untuk path relatif di Windows. |
 
 Jebakan saat membandingkan:
 
