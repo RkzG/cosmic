@@ -1,5 +1,9 @@
 # CLAUDE.md — Cosmic
 
+## Bahasa
+
+Selalu balas Franz dalam Bahasa Indonesia, termasuk ringkasan progres, rencana, dan pertanyaan. Kode, komentar kode, nama variabel, dan pesan commit tetap dalam bahasa Inggris sesuai aturan upstream.
+
 Panduan Cosmic untuk Claude Code. File ini berada di `cosmic/CLAUDE.md` dan dimuat lewat baris `@cosmic/CLAUDE.md` di `CLAUDE.md` root milik upstream. Baca file ini dulu, lalu dokumen di `cosmic/docs/` sesuai kebutuhan tugas.
 
 **Penting soal nama file:** `CLAUDE.md`, `ROADMAP.md`, dan `docs/architecture.md` di root repo adalah milik EffectCraft upstream. Jangan ditimpa atau diedit (kecuali satu baris import di `CLAUDE.md` root, lihat `cosmic/docs/UPSTREAM-PATCHES.md`). `ROADMAP.md` upstream berisi rencana EffectCraft; rencana Cosmic ada di `cosmic/docs/ROADMAP.md`. Semua dokumen dan catatan Cosmic ditaruh di folder `cosmic/`.
@@ -8,20 +12,20 @@ Panduan Cosmic untuk Claude Code. File ini berada di `cosmic/CLAUDE.md` dan dimu
 
 Repo ini adalah **fork dari [EffectCraft](https://github.com/storytold/effectcraft)** (editor motion graphics dan compositing open source ala After Effects, ditulis dengan Rust, lisensi MIT/Apache-2.0).
 
-Tujuannya: membangun **editor video lengkap dengan AI sebagai rekan kerja di dalamnya**. Pengguna mengunggah video referensi (TikTok, YouTube, dll.) sebagai *template*. AI menganalisis efek, pacing, dan alur ceritanya, lalu membuat ulang editan itu memakai footage milik pengguna. Pengguna mengarahkan lewat **prompt per tahap**, tapi tetap bisa mengedit manual di timeline, keyframe, dan panel efek seperti editor biasa.
+Tujuannya: membangun **editor video lengkap dengan AI sebagai rekan kerja di dalamnya**. Pengguna mengunggah video referensi (TikTok, YouTube, dll.) sebagai _template_. AI menganalisis efek, pacing, dan alur ceritanya, lalu membuat ulang editan itu memakai footage milik pengguna. Pengguna mengarahkan lewat **prompt per tahap**, tapi tetap bisa mengedit manual di timeline, keyframe, dan panel efek seperti editor biasa.
 
 Pemilik proyek: Franz, backend developer Go dengan pengalaman editing di Premiere Pro, After Effects, dan Alight Motion. Komunikasi dengan Franz dalam **Bahasa Indonesia**, singkat dan jelas.
 
 Dokumen detail:
 
-| File | Isi |
-| --- | --- |
-| `cosmic/docs/VISION.md` | Visi dan 9 kebutuhan fitur, dikelompokkan jadi 4 fase alur kerja |
-| `cosmic/docs/ARCHITECTURE.md` | Komponen sistem, cara AI berkomunikasi dengan editor, draft format resep editan |
-| `cosmic/docs/ROADMAP.md` | Urutan pengerjaan per fase beserta kriteria selesai |
-| `cosmic/docs/SETUP.md` | Langkah menyiapkan fork, build, dan alat pendukung di Windows |
-| `cosmic/docs/EFFECTCRAFT-NOTES.md` | Hasil uji EffectCraft dan jebakan yang sudah ditemukan |
-| `cosmic/docs/UPSTREAM-PATCHES.md` | Daftar setiap perubahan pada kode inti EffectCraft (wajib diperbarui) |
+| File                               | Isi                                                                             |
+| ---------------------------------- | ------------------------------------------------------------------------------- |
+| `cosmic/docs/VISION.md`            | Visi dan 9 kebutuhan fitur, dikelompokkan jadi 4 fase alur kerja                |
+| `cosmic/docs/ARCHITECTURE.md`      | Komponen sistem, cara AI berkomunikasi dengan editor, draft format resep editan |
+| `cosmic/docs/ROADMAP.md`           | Urutan pengerjaan per fase beserta kriteria selesai                             |
+| `cosmic/docs/SETUP.md`             | Langkah menyiapkan fork, build, dan alat pendukung di Windows                   |
+| `cosmic/docs/EFFECTCRAFT-NOTES.md` | Hasil uji EffectCraft dan jebakan yang sudah ditemukan                          |
+| `cosmic/docs/UPSTREAM-PATCHES.md`  | Daftar setiap perubahan pada kode inti EffectCraft (wajib diperbarui)           |
 
 ## Sebelum mengubah kode
 
@@ -38,6 +42,7 @@ Proyek upstream bergerak sangat cepat (commit pertama 1 Oktober 2026, sudah v0.2
 - Jangan merapikan, memformat ulang, atau me-refactor kode upstream yang tidak terkait tugas.
 - Pertahankan `LICENSE*`, `NOTICE`, dan `ATTRIBUTION.md`. Nama dan merek "EffectCraft" punya aturan tersendiri, jadi aplikasi ini bernama **Cosmic** (repo `RkzG/cosmic`).
 - Penggabungan upstream dilakukan rutin: `git fetch upstream` lalu `git merge upstream/main` di branch terpisah, uji, baru gabung ke branch utama.
+- Kerja selalu di branch cosmic/<nama-fase-atau-tugas>, commit per langkah kecil. Setelah fase selesai, push branch lalu buat PR ke main di RkzG/cosmic (pakai --repo RkzG/cosmic --base main). Jangan pernah membuat PR ke storytold/effectcraft, dan jangan merge tanpa persetujuan saya.
 
 ## Pembagian bahasa dan komponen
 
