@@ -15,6 +15,14 @@ Kerjakan berurutan. Setiap fase punya kriteria selesai; jangan lanjut sebelum kr
 
 **Selesai jika:** fork ter-build di Windows, bisa membuka dan me-render proyek, dan peta kode tersedia.
 
+### Tugas lanjutan dari Fase 0
+
+- [ ] Pesan error engine yang masih menyebut EffectCraft: `crates/engine/src/cmd/file.rs`, `import_project.rs` (pesan versi), `enabled.rs`, `essential.rs`, `animation.rs`, `vpe.rs`, `blender.rs`, `system/library.rs` (pesan plug-in), `interchange/xml_project.rs`, dan catatan di `settings/prefs/dialog.rs`. Pesan versi ("saved by EffectCraft 0.25") sebaiknya netral ("saved by a newer version"). Lewat `cosmic/tools/rebrand.py`.
+- [ ] Teks lain yang belum diganti: clipboard "EffectCraft: 3 layers" (`crates/ui-egui/src/menus/frontend.rs`), "EffectCraft built-in effect" (`effect_controls/panel.rs`), judul server MCP "EffectCraft (mode)" (`crates/automation/src/server.rs`), menu macOS "Hide/Quit EffectCraft".
+- [ ] Pengecekan update (`crates/ui-egui/src/lib.rs`, `UPDATE_APP`) masih memeriksa rilis EffectCraft. Matikan atau arahkan ke rilis Cosmic.
+- [ ] "Online Tutorials..." di menu Help masih membuka `getartcraft.com/apps/effectcraft`.
+- [ ] Perintah `help.discord`, `help.website`, `help.sibling` masih terdaftar (bisa dipanggil lewat command palette, CLI, MCP) walau tidak ada lagi di UI.
+
 ## Fase 1: Format resep dan penerjemah
 
 - [ ] Sempurnakan draft format resep di `ARCHITECTURE.md`; tulis JSON Schema-nya.

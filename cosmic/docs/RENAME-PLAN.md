@@ -4,7 +4,7 @@ Status: **disetujui Franz 2026-11-15, dikerjakan di branch `cosmic/rename-displa
 
 Belum ditangani (tugas lanjutan):
 - **Pengecekan update** (`crates/ui-egui/src/lib.rs`, `UPDATE_APP` = `craft_update::suite::EFFECTCRAFT`): Cosmic masih memeriksa rilis EffectCraft dan bisa menawarkan update ke EffectCraft. Perlu dimatikan atau diarahkan ke rilis Cosmic.
-- **Laporan bug** (`effectcraft_engine::links::ISSUES`) masih mengarah ke issue tracker upstream.
+- ~~**Laporan bug** (`effectcraft_engine::links::ISSUES`) masih mengarah ke issue tracker upstream.~~ Selesai 2026-11-15: mengarah ke `RkzG/cosmic/issues`. Rebrand lanjutan (Welcome, Community, header, menu Help, Settings, folder) juga selesai; sisa tugas tercatat di `cosmic/docs/ROADMAP.md` ("Tugas lanjutan dari Fase 0").
 - Nama binary, installer, dan app id (pilihan 3 di bawah) ditunda sampai rilis.
 - Label menu aplikasi macOS ("EffectCraft" di bilah menu Mac) belum diganti; Franz memakai Windows.
 

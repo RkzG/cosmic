@@ -13,7 +13,7 @@ Fitur baru sebaiknya berada di file atau modul baru, sehingga daftar ini tetap p
 
 ## Rebrand tampilan (Cosmic)
 
-Semua perubahan teks, ikon, dan folder pengaturan pada file upstream (**13 file**) dilakukan oleh **`cosmic/tools/rebrand.py`**. Ditambah 2 file yang diubah manual (`CLAUDE.md`, `ATTRIBUTION.md`, tabel di atas), totalnya 15 file upstream. Daftar persis setiap penggantian ada di variabel `EDITS` di skrip itu.
+Semua perubahan teks, ikon, dan folder pengaturan pada file upstream (**27 file**) dilakukan oleh **`cosmic/tools/rebrand.py`**. Ditambah 2 file yang diubah manual (`CLAUDE.md`, `ATTRIBUTION.md`, tabel di atas), totalnya 29 file upstream. Pengujian 2026-11-15: ke-27 file dikembalikan ke versi `upstream/main`, skrip dijalankan, hasilnya identik. Daftar persis setiap penggantian ada di variabel `EDITS` di skrip itu.
 
 Saat sinkron upstream:
 1. Kalau salah satu file di bawah bentrok, ambil versi upstream (`git checkout --theirs <file>`), lalu jalankan `python -I cosmic/tools/rebrand.py`.
@@ -33,6 +33,26 @@ Saat sinkron upstream:
 | 2026-11-15 | `crates/ui-egui/src/panels/dialogs.rs` | Isi dialog About | Judul, nama, tagline, dan deskripsi dari `cosmic_brand` ("based on EffectCraft by the ArtCraft team") |
 | 2026-11-15 | `crates/ui-egui/src/panels/unsaved.rs` | Judul jendela setelah proyek dibuka | `"Cosmic - <proyek>"` lewat `cosmic_brand::NAME` |
 | 2026-11-15 | `crates/ui-egui/tests/it/ui_window_title.rs` | Test judul jendela mengikuti nama baru | Awalan yang dicek: `"Cosmic - "` |
+| 2026-11-15 | `crates/engine/src/home/links.rs` | Link Help, About, Home ke repo Cosmic | `GITHUB` dan `ISSUES` ke `RkzG/cosmic`; konstanta baru `UPSTREAM` ke `storytold/effectcraft` |
+| 2026-11-15 | `crates/engine/src/cmd/help.rs` | Label perintah Help | "Cosmic Help...", "Cosmic on GitHub", `help.appPage` menjadi "Based on EffectCraft" dan membuka `UPSTREAM`; `help.discord` dan `help.website` tidak lagi menyatakan menu Help (test menuntut menu yang dinyatakan ada di pohon menu), perintahnya tetap ada |
+| 2026-11-15 | `crates/engine/src/tests/session.rs` | Test URL Help mengikuti link baru | `help.github` mengarah ke `https://github.com/RkzG/cosmic`; dokumentasi Help dicek dengan awalan `https://github.com/RkzG/cosmic/blob/main/` |
+| 2026-11-15 | `crates/engine/src/tests/aep_import.rs` | Test urutan menu File ▸ Import | "Cosmic Project..." |
+| 2026-11-15 | `crates/engine/src/menus.rs` (lanjutan) | Menu Help dan File | "Cosmic Help...", File ▸ Import ▸ "Cosmic Project..."; entri Discord dan ArtCraft Website dihapus; "Based on EffectCraft", "Cosmic on GitHub" |
+| 2026-11-15 | `crates/engine/src/cmd/import_project.rs` | Label perintah impor | "Cosmic Project..." |
+| 2026-11-15 | `crates/ui-egui/src/i18n.rs` (lanjutan) | Terjemahan menu | Baris `help.github`, `help.docs`, `file.importProject` diganti ke Cosmic (13 bahasa); baris `help.discord`, `help.website`, `help.appPage` dihapus |
+| 2026-11-15 | `crates/ui-egui/src/i18n/ui.rs` (lanjutan) | Terjemahan panel | Welcome, "Cosmic project", "Cosmic on GitHub", Settings, Learn diganti ke Cosmic; baris Discord, ArtCraft website, "More ArtCraft apps", "EffectCraft home page", "Source code on GitHub" dihapus |
+| 2026-11-15 | `crates/ui-egui/src/panels/home.rs` | Layar Welcome | "Welcome to Cosmic", jenis "Cosmic project" di Recent (termasuk test-nya); Community berisi "Cosmic on GitHub" dan "Based on EffectCraft"; daftar aplikasi ArtCraft dihapus; `home.help.discord` dihapus dari daftar kontrol di test |
+| 2026-11-15 | `crates/ui-egui/src/header.rs` (lanjutan) | Toolbar | Tombol Discord dan website dihapus; tombol GitHub "Cosmic on GitHub" |
+| 2026-11-15 | `crates/ui-egui/tests/it/ui_panels.rs` | Tombol Discord tidak ada lagi | Test `discord_pill_fits_its_label` dihapus |
+| 2026-11-15 | `crates/ui-egui/src/panels/dialogs.rs` (lanjutan) | Link di About | Dua link: "Cosmic on GitHub" dan "Based on EffectCraft" |
+| 2026-11-15 | `apps/effectcraft/src/file_dialogs.rs` | Dialog buka/simpan | Filter "Cosmic Project" (ekstensi tetap `.ecproj`) |
+| 2026-11-15 | `apps/effectcraft/src/main.rs` (lanjutan) | Pesan GPU dan gagal buka jendela | Nama Cosmic; laporan ke `https://github.com/RkzG/cosmic/issues` |
+| 2026-11-15 | `apps/effectcraft/build.rs` (lanjutan) | Info `.exe` sesuai nama terpasang | OriginalFilename `cosmic.exe`, InternalName `cosmic` |
+| 2026-11-15 | `crates/ui-egui/src/panels/settings.rs` | Teks Settings (termasuk test-nya) | "Restart Cosmic to finish", "Needs a newer Cosmic", "Cosmic didn't quit normally last time.", "Cosmic keeps …", "Stored, but not used by Cosmic yet" |
+| 2026-11-15 | `crates/ui-egui/src/panels/learn.rs` | Tab Learn | "Hands-on tutorials that run inside Cosmic." |
+| 2026-11-15 | `crates/engine/src/settings/autosave.rs` | Folder di disk | `Cosmic Auto-Save` |
+| 2026-11-15 | `crates/engine/src/system/logging.rs` | File log | `Cosmic Log.txt` |
+| 2026-11-15 | `crates/ui-egui/src/panels/effects_presets.rs`, `crates/ui-egui/tests/it/ui_presets_folder.rs` | Folder preset | `Documents\Cosmic\Presets` |
 
 ## Catatan sinkron upstream
 
