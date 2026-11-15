@@ -5,7 +5,7 @@ use crate::i18n::{tr, tr_args};
 use egui::{Align2, Color32, Rect, Sense, Stroke, StrokeKind, pos2, vec2};
 use serde_json::json;
 
-use crate::icons::{self, Icon};
+use crate::icons::Icon;
 use crate::state::Tool;
 use crate::theme::Tokens;
 use crate::widgets;
@@ -295,10 +295,11 @@ fn right_side(app: &mut EffectcraftApp, ui: &mut egui::Ui, p: &egui::Painter, re
     workspace_tabs(app, ui, p, rx, left, cy);
 }
 
-/// The Discord pill and the GitHub and website buttons, right to left from `rx`; returns the new `rx`.
-fn community_buttons(app: &mut EffectcraftApp, ui: &mut egui::Ui, p: &egui::Painter, mut rx: f32, cy: f32) -> f32 {
+/// Cosmic fork: the GitHub button (Cosmic's repository), left of `rx`; returns the new `rx`.
+fn community_buttons(app: &mut EffectcraftApp, ui: &mut egui::Ui, _p: &egui::Painter, mut rx: f32, cy: f32) -> f32 {
     let t = app.tokens;
-    for (id, icon, tip, cmd) in [("hdr-github", Icon::Code, "Cosmic on GitHub", "help.github")] {
+    let (id, icon, tip, cmd) = ("hdr-github", Icon::Code, "Cosmic on GitHub", "help.github");
+    {
         let r = Rect::from_min_max(pos2(rx - 26.0, cy - 13.0), pos2(rx, cy + 13.0));
         if widgets::icon_button(ui, r, icon, false, &t, egui::Id::unique(id)).on_hover_text(tip).clicked() {
             let _ = app.session.execute(cmd, json!({}));

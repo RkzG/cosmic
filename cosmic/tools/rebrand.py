@@ -305,8 +305,18 @@ MORE = {
             "    for (id, icon, tip, cmd) in\n"
             '        [("hdr-github", Icon::Code, "EffectCraft on GitHub", "help.github"), ("hdr-web", Icon::Globe, "EffectCraft on getartcraft.com", "help.appPage")]\n'
             "    {",
-            '    for (id, icon, tip, cmd) in [("hdr-github", Icon::Code, "Cosmic on GitHub", "help.github")] {',
+            # One button left: a block instead of a loop (clippy: single_element_loop).
+            '    let (id, icon, tip, cmd) = ("hdr-github", Icon::Code, "Cosmic on GitHub", "help.github");\n'
+            "    {",
         ),
+        # The Discord pill was the only user of the painter and of `icons::paint` here.
+        exact(
+            "/// The Discord pill and the GitHub and website buttons, right to left from `rx`; returns the new `rx`.\n"
+            "fn community_buttons(app: &mut EffectcraftApp, ui: &mut egui::Ui, p: &egui::Painter,",
+            "/// Cosmic fork: the GitHub button (Cosmic's repository), left of `rx`; returns the new `rx`.\n"
+            "fn community_buttons(app: &mut EffectcraftApp, ui: &mut egui::Ui, _p: &egui::Painter,",
+        ),
+        exact("use crate::icons::{self, Icon};", "use crate::icons::Icon;"),
     ],
     "crates/ui-egui/tests/it/ui_panels.rs": [
         remove(r"^/// #581: the header's Discord pill[\s\S]*?^}\n\n", 1),

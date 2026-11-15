@@ -20,7 +20,8 @@ New-Item -ItemType Directory -Force $LogDir | Out-Null
 $stages = @(
     @{ name = "fmt";          cmd = "cargo fmt --check" },
     @{ name = "clippy";       cmd = "cargo clippy --workspace --all-targets -- -D warnings" },
-    @{ name = "tests";        cmd = "cargo nextest run --workspace --lib --bins --tests --no-fail-fast -E 'not package(effectcraft-gpu)'" },
+    # Double quotes around the filter: cmd.exe does not treat single quotes as quoting.
+    @{ name = "tests";        cmd = 'cargo nextest run --workspace --lib --bins --tests --no-fail-fast -E "not package(effectcraft-gpu)"' },
     @{ name = "gpu-tests";    cmd = "cargo test -p effectcraft-gpu --lib --no-fail-fast" },
     @{ name = "doctests";     cmd = "cargo test --workspace --doc --no-fail-fast" },
     @{ name = "pdf-deps";     cmd = "cargo xtask pdf-deps" },

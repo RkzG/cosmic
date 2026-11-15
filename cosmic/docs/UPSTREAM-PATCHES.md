@@ -42,7 +42,7 @@ Saat sinkron upstream:
 | 2026-11-15 | `crates/ui-egui/src/i18n.rs` (lanjutan) | Terjemahan menu | Baris `help.github`, `help.docs`, `file.importProject` diganti ke Cosmic (13 bahasa); baris `help.discord`, `help.website`, `help.appPage` dihapus |
 | 2026-11-15 | `crates/ui-egui/src/i18n/ui.rs` (lanjutan) | Terjemahan panel | Welcome, "Cosmic project", "Cosmic on GitHub", Settings, Learn diganti ke Cosmic; baris Discord, ArtCraft website, "More ArtCraft apps", "EffectCraft home page", "Source code on GitHub" dihapus |
 | 2026-11-15 | `crates/ui-egui/src/panels/home.rs` | Layar Welcome | "Welcome to Cosmic", jenis "Cosmic project" di Recent (termasuk test-nya); Community berisi "Cosmic on GitHub" dan "Based on EffectCraft"; daftar aplikasi ArtCraft dihapus; `home.help.discord` dihapus dari daftar kontrol di test |
-| 2026-11-15 | `crates/ui-egui/src/header.rs` (lanjutan) | Toolbar | Tombol Discord dan website dihapus; tombol GitHub "Cosmic on GitHub" |
+| 2026-11-15 | `crates/ui-egui/src/header.rs` (lanjutan) | Toolbar | Tombol Discord dan website dihapus; tombol GitHub "Cosmic on GitHub" (blok biasa, bukan loop satu elemen); import `icons` dan parameter painter yang tak terpakai disesuaikan supaya clippy `-D warnings` lulus |
 | 2026-11-15 | `crates/ui-egui/tests/it/ui_panels.rs` | Tombol Discord tidak ada lagi | Test `discord_pill_fits_its_label` dihapus |
 | 2026-11-15 | `crates/ui-egui/src/panels/dialogs.rs` (lanjutan) | Link di About | Dua link: "Cosmic on GitHub" dan "Based on EffectCraft" |
 | 2026-11-15 | `apps/effectcraft/src/file_dialogs.rs` | Dialog buka/simpan | Filter "Cosmic Project" (ekstensi tetap `.ecproj`) |
