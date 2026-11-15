@@ -12,6 +12,9 @@
 param([string]$LogDir = "")
 
 $ErrorActionPreference = "Continue"
+# No incremental cache: a full run builds every crate once anyway, and the cache took ~17 GB of
+# disk (a full disk failed the 2026-11-15 run). Daily `cargo test -p` runs keep it.
+$env:CARGO_INCREMENTAL = "0"
 $root = Resolve-Path (Join-Path $PSScriptRoot "..\..")
 Set-Location $root
 if (-not $LogDir) { $LogDir = Join-Path $root "target\cosmic-ci" }
