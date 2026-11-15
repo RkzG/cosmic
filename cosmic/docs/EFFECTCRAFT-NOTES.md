@@ -45,6 +45,7 @@ Perbandingan fork (`cosmic/fase-0`) dengan `upstream/main` (`7cbefaf7`) memakai 
 | `cargo xtask ci` gagal di tahap tests | gagal | (tidak dijalankan) | `xtask.exe` sedang berjalan saat tahap test membangun ulang workspace (termasuk `xtask`). Windows tidak bisa menimpa exe yang sedang dipakai ("failed to remove file … xtask.exe"). Pakai `cosmic/scripts/ci.ps1`. |
 | Tahap `wasm` butuh target `wasm32-unknown-unknown`, contoh plug-in `posterize-bands` gagal tanpa target itu | - | - | Cosmic hanya desktop Windows; wasm dilewati (lihat `cosmic/CLAUDE.md`). Target sudah terpasang kalau perlu. |
 | Test unit `ui-egui` sempat macet sekitar 18 menit (sekali, pukul 18:43) | tidak terulang | tidak terjadi | Tidak bisa direproduksi. Ulangan dengan `cargo test` biasa selesai dalam sekitar 6 detik di upstream (575 lulus) dan di fork setelah build bersih. Dengan `cargo nextest` di upstream: 575 lulus. Penyebab macet pertama tidak diketahui. |
+| Test integrasi `ui-egui` `ui_gpu::the_viewer_exposes_32_bpc_frames_on_the_gpu` gagal ("drawn by the display pass on the device") | gagal | gagal, pesan sama | Viewer 32 bpc tidak digambar lewat display pass GPU di laptop ini (RTX 4070 Laptop). Kemungkinan terkait GPU/driver Windows; penyebab pastinya belum diselidiki. Bukan dari Cosmic. |
 
 Jebakan saat membandingkan:
 
